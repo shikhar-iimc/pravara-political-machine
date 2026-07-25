@@ -11,54 +11,28 @@ from graph_html import build_html
 st.set_page_config(page_title="Pravara: the sugar-bank-party network",
                    layout="wide", initial_sidebar_state="collapsed")
 
-# Force a light appearance even when the browser or OS is set to dark mode,
-# and keep text dark so nothing camouflages against the background.
+# Light appearance. The real fix for dark-mode browsers lives in
+# .streamlit/config.toml (base="light" + explicit colors) because that's
+# what st.dataframe's canvas grid and BaseWeb widget internals (radio dot,
+# toggle knob/track) actually read. CSS injected here can't reach into a
+# <canvas> element, and blanket-overriding div backgrounds like the old
+# version did was also stripping the fill color off the radio dot and the
+# toggle knob, making them invisible even though they still worked.
+# So this block is now deliberately narrow: cosmetic touches only, nothing
+# that reaches into stRadio/stCheckbox/stDataFrame internals.
 st.markdown(
     """
     <style>
       :root { color-scheme: only light; }
 
-      html, body, .stApp,
-      [data-testid="stAppViewContainer"],
-      [data-testid="stHeader"],
-      [data-testid="stMain"],
-      [data-testid="stSidebar"],
-      [data-testid="stToolbar"],
-      [data-testid="stDecoration"],
-      section, main, div, span, p, label {
-        background-color: #ffffff !important;
-        color: #111111 !important;
-      }
+      h1, h2, h3, h4 { color: #111111 !important; font-family: Georgia, 'Times New Roman', serif !important; }
 
-      /* tabs */
-      [data-baseweb="tab-list"] { background-color: #ffffff !important; }
-      [data-baseweb="tab"] { background-color: #ffffff !important; }
-      [data-baseweb="tab"] p, [data-baseweb="tab"] div { color: #111111 !important; }
+      /* captions */
+      [data-testid="stCaptionContainer"] p { color: #5c5c5c !important; }
+
+      /* tab underline / active tab color only - not backgrounds */
       [aria-selected="true"] p, [aria-selected="true"] div { color: #1f3a5f !important; }
       [data-baseweb="tab-highlight"] { background-color: #1f3a5f !important; }
-      [data-baseweb="tab-border"] { background-color: #e2e2e2 !important; }
-
-      /* radio buttons */
-      [data-testid="stRadio"] label,
-      [data-testid="stRadio"] p,
-      [data-testid="stRadio"] div { color: #111111 !important; background-color: transparent !important; }
-
-      /* toggle / checkbox */
-      [data-testid="stCheckbox"] label,
-      [data-testid="stCheckbox"] p { color: #111111 !important; }
-
-      /* dataframe / table */
-      [data-testid="stDataFrame"] { background-color: #ffffff !important; }
-
-      /* metrics */
-      [data-testid="stMetric"] { background-color: #ffffff !important; }
-      [data-testid="stMetricValue"], [data-testid="stMetricLabel"] { color: #111111 !important; }
-
-      /* captions and markdown */
-      [data-testid="stCaptionContainer"] p { color: #5c5c5c !important; }
-      .stMarkdown p, .stMarkdown li { color: #111111 !important; }
-
-      h1, h2, h3, h4 { color: #111111 !important; font-family: Georgia, 'Times New Roman', serif !important; }
     </style>
     """,
     unsafe_allow_html=True,
