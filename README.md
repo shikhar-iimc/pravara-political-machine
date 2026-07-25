@@ -22,16 +22,6 @@ streamlit run app.py
 
 Then open the local URL it prints (usually http://localhost:8501).
 
-## Deploy on Streamlit Community Cloud
-
-1. Create a new public GitHub repository and add every file in this folder,
-   keeping the `.streamlit/config.toml` path intact.
-2. Go to https://share.streamlit.io and sign in with GitHub.
-3. Click New app, pick the repository and branch, and set the main file to `app.py`.
-4. Click Deploy. The first build takes a minute or two.
-5. Streamlit gives you a public URL. Paste that into the essay appendix in place of
-   the bracketed placeholder.
-
 ## Notes on appearance
 
 The theme is pinned to a white background with dark text in two places at once:
