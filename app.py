@@ -258,6 +258,22 @@ with tab_district:
             }),
             use_container_width=True, hide_index=True, height=420,
         )
+
+    with st.expander("See the full table, all districts"):
+        show_cols_all = ["sr_no", "district", "factory_name", "type", "tcd", "crushing_mt",
+                          "total_net_frp_payable_lakh", "total_frp_paid_excl_ht_lakh",
+                          "arrears_lakh", "pct_frp_paid"]
+        st.dataframe(
+            frp_df[show_cols_all].sort_values(["district", "sr_no"]).rename(columns={
+                "sr_no": "Sr.", "district": "District", "factory_name": "Factory", "type": "Type",
+                "tcd": "TCD", "crushing_mt": "Crushing (MT)",
+                "total_net_frp_payable_lakh": "Net FRP payable (Rs lakh)",
+                "total_frp_paid_excl_ht_lakh": "FRP paid, excl. H&T (Rs lakh)",
+                "arrears_lakh": "Arrears (Rs lakh)", "pct_frp_paid": "% FRP paid",
+            }),
+            use_container_width=True, hide_index=True, height=420,
+        )
+
     st.caption(
         "Sugar Commissionerate, Maharashtra, Statement A, season 2025-26, as on 28 February 2026. "
         "Transcribed from the original scanned report; see Sources and notes for the cleanup method."
