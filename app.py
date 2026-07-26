@@ -129,7 +129,7 @@ st.title("The Factory as Political Machine")
 st.write(
     "An interactive map of how ownership, control and credit overlap in the Pravara "
     "cooperative sugar factory and its surrounding institutions. This companion to the essay "
-    "lets you see the mechanism the text describes, and change the political period to watch "
+    "lets one see the mechanism the text describes, and change the political period to watch "
     "the machine stay put while the party label moves."
 )
 st.caption(
